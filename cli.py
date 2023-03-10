@@ -13,7 +13,7 @@ while True:
     if user_action.startswith("add"):
         todo = user_action[4:]
 
-        todos = function.get_todos( )
+        todos = function.get_todos()
 
         todos.append(todo + "\n")
 
@@ -31,15 +31,15 @@ while True:
     elif user_action.startswith("edit"):
         try:
             number = int(user_action[5:])
-            number = number -1
+            number = number - 1
 
-            todos = function.get_todos("venv/todos.txt")
-            #print("Here is todos existing", todos)
+            todos = function.get_todos()
+            # print("Here is todos existing", todos)
 
             new_todo = input("enter a new todo:")
             todos[number] = new_todo + "\n"
 
-            function.write_todos("todos.txt", todos)
+            function.write_todos(todos)
         except ValueError:
             print("Your command is not valid!")
             continue
@@ -52,22 +52,18 @@ while True:
         try:
             number = int(user_action[9:])
 
-            todos = function.get_todos("venv/todos.txt")
-            index = number  - 1
+            todos = function.get_todos()
+            index = number - 1
             todo_to_remove = todos[index].strip("\n")
             todos.pop(index)
 
-            function.write_todos("todos.txt", todos)
+            function.write_todos(todos)
 
             message = f"Todo {todo_to_remove} was removed from the list."
             print(message)
-        except IndexError and ValueError:
+        except IndexError:
             print("There is no number with that item!")
         continue
-
-
-
-
     elif user_action.startswith("exit"):
         break
 
